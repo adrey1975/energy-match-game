@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Metadata -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Activity</title>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+
+        <!-- CSS -->
+        <style>
+            :root {
+              --blue: rgb(92, 113, 242);
+              --blue-dark: rgb(51, 56, 118);
+              --blue-light: rgb(162, 169, 242);
+              --gray: rgb(197, 197, 197);
+              --gray-dark: rgb(124, 124, 124);
+              --gray-light: rgb(237, 237, 237);
+              --off-black: rgb(36, 36, 36);
+              --off-white: rgb(242, 242, 242);
+              --teal: rgb(134, 213, 224);
+              --teal-dark: rgb(100, 160, 168);
+              --teal-light: rgb(204, 238, 242);
+            }
+
+            body {
+              background-color: var(--off-white);
+              font-family: "Poppins", sans-serif;
+            }
+
+            .button {
+              background-color: var(--button-background-color);
+              border: var(--button-border-color) .1em solid;
+              border-radius: .2em;
+              box-shadow: inset 0 .1em 0 rgba(255, 255, 255, 0.15), 0 .1em .1em rgba(0, 0, 0, 0.075);
+              color: var(--button-color);
+              font-family: inherit;
+              padding: .2em .4em;
+              transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+            }
+
+            .button:active {
+              box-shadow: none;
+            }
+
+            .button:hover {
+              background-color: var(--button-hover-background-color);
+              cursor: pointer;
+            }
+
+            .button-blue {
+              --button-color: white;
+              --button-background-color: var(--blue);
+              --button-border-color: var(--blue-dark);
+              --button-hover-background-color: var(--blue-dark);
+            }
+
+            .button-dark {
+              --button-color: white;
+              --button-background-color: var(--off-black);
+              --button-border-color: black;
+              --button-hover-background-color: black;
+            }
+
+            .button-light {
+              --button-color: black;
+              --button-background-color: var(--gray-light);
+              --button-border-color: var(--gray-dark);
+              --button-hover-background-color: var(--gray);
+            }
+
+            .button-teal {
+              --button-color: black;
+              --button-background-color: var(--teal);
+              --button-border-color: var(--teal-dark);
+              --button-hover-background-color: var(--teal-dark);
+            }
+
+            .centered-horizontally {
+              display: flex;
+              justify-content: center;
+            }
+
+            .grid {
+              --gutter-x: 1.5rem;
+              --gutter-y: 0;
+              width: 100%;
+              padding-right: calc(var(--gutter-x) * 0.5);
+              padding-left: calc(var(--gutter-x) * 0.5);
+              margin-right: auto;
+              margin-left: auto;
+              max-width: 720px;
+            }
+
+            .grid-row {
+              --gutter-x: 1.5rem;
+              --gutter-y: 0;
+              display: flex;
+              flex-wrap: wrap;
+              margin-top: calc(-1 * var(--gutter-y));
+              margin-right: calc(-0.5 * var(--gutter-x));
+              margin-left: calc(-0.5 * var(--gutter-x));
+            }
+
+            .grid-row > * {
+              flex-shrink: 0;
+              margin-top: var(--gutter-y);
+              max-width: 100%;
+              padding-right: calc(var(--gutter-x) * 0.5);
+              padding-left: calc(var(--gutter-x) * 0.5);
+              width: 100%;
+            }
+
+            @media (min-width: 768px) {
+              .grid-col {
+                flex: 1 0 0%;
+              }
+
+              .grid-col-1 {
+                flex: 0 0 auto;
+                width: 8.33333333%;
+              }
+
+              .grid-col-2 {
+                flex: 0 0 auto;
+                width: 16.66666667%;
+              }
+                
+              .grid-col-3 {
+                flex: 0 0 auto;
+                width: 25%;
+              }
+
+              .grid-col-4 {
+                flex: 0 0 auto;
+                width: 33.33333333%;
+              }
+
+              .grid-col-5 {
+                flex: 0 0 auto;
+                width: 41.66666667%;
+              }
+
+              .grid-col-6 {
+                flex: 0 0 auto;
+                width: 50%;
+              }
+
+              .grid-col-7 {
+                flex: 0 0 auto;
+                width: 58.33333333%;
+              }
+
+              .grid-col-8 {
+                flex: 0 0 auto;
+                width: 66.66666667%;
+              }
+
+              .grid-col-9 {
+                flex: 0 0 auto;
+                width: 75%;
+              }
+
+              .grid-col-10 {
+                flex: 0 0 auto;
+                width: 83.33333333%;
+              }
+
+              .grid-col-11 {
+                flex: 0 0 auto;
+                width: 91.66666667%;
+              }
+
+              .grid-col-12 {
+                flex: 0 0 auto;
+                width: 100%;
+              }
+            }
+
+            h1, h2, h3, h4, h5, h6 {
+              font-weight: 600;
+              line-height: 1.2;
+              margin-bottom: .5rem;
+              margin-top: 0;
+            }
+
+            .input {
+              appearance: none;
+              -moz-appearance: none;
+              -webkit-appearance: none;
+              border: var(--gray-dark) .1em solid;
+              border-radius: .2em;
+              box-sizing: border-box;
+              font-family: inherit;
+              padding: .2em .4em;
+              transition: border 0.15s ease-in-out;
+            }
+
+            .input:focus {
+              outline: none;
+              border-color: var(--teal-dark);
+            }
+
+            .input-textarea {
+              line-height: 1.2;
+              padding: .4em;
+              resize: none;
+            }
+
+            .margin-bottom-0 {
+              margin-bottom: 0rem !important;
+            }
+
+            .margin-bottom-1 {
+              margin-bottom: .25rem !important;
+            }
+
+            .margin-bottom-2 {
+              margin-bottom: .5rem !important;
+            }
+
+            .margin-bottom-3 {
+              margin-bottom: 1rem !important;
+            }
+
+            .margin-top-0 {
+              margin-top: 0rem !important;
+            }
+
+            .margin-top-1 {
+              margin-top: .25rem !important;
+            }
+
+            .margin-top-2 {
+              margin-top: .5rem !important;
+            }
+
+            .margin-top-3 {
+              margin-top: 1rem !important;
+            }
+
+            p {
+              margin-top: 0;
+              margin-bottom: 1rem;
+            }
+
+            /* Adrian's CSS */
+
+            .container {
+                max-width: 960px;
+                margin: auto;
+            }
+
+            h1, h3, p {
+                text-align: center;
+            }
+
+            main {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .draggable-list {
+                padding: 5px;
+            }
+
+            li {
+                list-style: none;
+                padding: 10px;
+                margin: 5px;
+                background-color: rgb(162, 169, 242);
+                border: 1px solid rgb(124, 124, 124);
+                color: #263238;
+                cursor: grab;
+            }
+
+            .over {
+                background-color: rgb(197, 197, 197) !important;
+            }
+
+            table {
+                max-width: 640px;
+                margin: auto;
+                margin-bottom: 20px;
+            }
+
+            th, td{
+                padding: 10px 10px;
+            }
+
+            td {
+                border: 1px solid rgb(124, 124, 124);
+            }
+
+            tr:nth-child(even) {
+                background-color: rgb(197, 197, 197);
+            }
+
+            button {
+                margin: auto;
+                cursor: pointer;
+                display: block;
+                padding: 10px;
+                font-size: 16px;
+                border-radius: 4px;
+                border: none;
+                background-color: rgb(92, 113, 242);
+                color: white;
+            }
+
+            button:hover {
+                background-color: rgb(197, 197, 197);
+            }
+
+            #endMessage {
+                display: none;
+            }
+
+            #hintMessage {
+                text-align: center;
+                color: red;
+                margin-top: 20px;
+                font-weight: bold;
+            } 
+
+        </style>
+
+    </head>
+    <body>
+        <h1> Energy Matching Game </h1>
+        <p>Drag the energy type over the matching energy feature</p>
+
+        <main class="container">
+            <div>
+                <ul class="draggable-list">
+                    <li id="e1" draggable="true">Solar Energy</li>
+                    <li id="e2" draggable="true">Wind Energy</li>
+                    <li id="e3" draggable="true">Hydropower</li>
+                    <li id="e4" draggable="true">Geothermal</li>
+                </ul>
+            </div>
+            <div>
+                <ul class="draggable-list">
+                    <li id="f4" draggable="true">Steam Power Plant</li>
+                    <li id="f1" draggable="true">Solar Panel</li>
+                    <li id="f2" draggable="true">Wind Turbine</li>
+                    <li id="f3" draggable="true">Dam</li>
+                </ul>
+            </div>
+        </main>
+        <div id="hintMessage" style="display: none;"></div>
+        <div id="endMessage">
+            <h3>Great job!</h3>
+            <h3>You matched all the tiles correctly!</h3>
+            <table>
+                <tr>
+                    <th>Energy Type</th>
+                    <th>Energy Feature</th>
+                </tr>
+                <tr>
+                    <td>Wind Energy</td>
+                    <td>Wind Turbine</td>
+                </tr>
+                <tr>
+                    <td>Hydropower</td>
+                    <td>Dam</td>
+                </tr>
+                <tr>
+                    <td>Solar Energy</td>
+                    <td>Solar Panel</td>
+                </tr>
+                <tr>
+                    <td>Geothermal</td>
+                    <td>Steam Power Plant</td>
+                </tr>
+            </table>
+
+            <button id="playAgainBtn">Play Again</button>
+        </div>
+
+        <script>
+          let selectedId;
+          let dropTargetId;
+          let matchingCounter = 0;
+      
+          document.addEventListener('DOMContentLoaded', () => {
+              const endMessage = document.getElementById('endMessage');
+              const hintMessage = document.getElementById('hintMessage');
+              const playAgainBtn = document.getElementById('playAgainBtn'); 
+      
+              function addEventListeners() {
+                  const draggableListItems = document.querySelectorAll('.draggable-list li');
+                  draggableListItems.forEach(item => {
+                      item.addEventListener('dragstart', dragStart);
+                      item.addEventListener('dragenter', dragEnter);
+                      item.addEventListener('dragover', dragOver);
+                      item.addEventListener('dragleave', dragLeave);
+                      item.addEventListener('drop', dragDrop);
+                  });
+              }
+      
+              function dragStart() { selectedId = this.id; }
+              function dragEnter() { this.classList.add('over'); }
+              function dragLeave() { this.classList.remove('over'); }
+              function dragOver(ev) { ev.preventDefault(); }
+              
+              function dragDrop() {
+                  dropTargetId = this.id;
+                  if (checkForMatch(selectedId, dropTargetId)) {
+                      document.getElementById(selectedId).style.backgroundColor = 'green';
+                      document.getElementById(dropTargetId).style.backgroundColor = 'green';
+                      document.getElementById(selectedId).setAttribute('draggable', false);
+                      document.getElementById(dropTargetId).setAttribute('draggable', false);
+                      matchingCounter++;
+                      if (matchingCounter === 4) {
+                          setTimeout(() => endMessage.style.display = 'block', 500);
+                      }
+                  } else {
+                      let hint = getHint(selectedId, dropTargetId);
+                      hintMessage.innerText = `Incorrect match. ${hint}`;
+                      hintMessage.style.display = 'block';
+                      setTimeout(() => hintMessage.style.display = 'none', 3000);
+                  }
+                  this.classList.remove('over');
+              }
+      
+              function checkForMatch(selected, dropTarget) {
+                  const pairs = { 'e1': 'f1', 'e2': 'f2', 'e3': 'f3', 'e4': 'f4' };
+                  return pairs[selected] === dropTarget;
+              }
+      
+              function getHint(selected, dropTarget) {
+                  const hints = {
+                      'e1': 'Solar Energy powers Solar Panels.',
+                      'e2': 'Wind Energy powers Wind Turbines.',
+                      'e3': 'Hydropower uses Dams.',
+                      'e4': 'Geothermal energy is used in Steam Power Plants.'
+                  };
+                  return hints[selected] || 'Try matching related energy types and features.';
+              }
+      
+              function shuffleTiles() {
+                  const lists = document.querySelectorAll('.draggable-list');
+                  lists.forEach(list => {
+                      let items = Array.from(list.children);
+                      for (let i = items.length - 1; i > 0; i--) {
+                          const j = Math.floor(Math.random() * (i + 1));
+                          [items[i], items[j]] = [items[j], items[i]];
+                      }
+                      list.innerHTML = '';
+                      items.forEach(item => list.appendChild(item));
+                  });
+              }
+      
+              function playAgain() {
+                  document.getElementById('endMessage').style.display = 'none';
+                  matchingCounter = 0;
+      
+                  const allItems = document.querySelectorAll('.draggable-list li');
+                  allItems.forEach(item => {
+                      item.style.backgroundColor = 'rgb(162, 169, 242)';
+                      item.setAttribute('draggable', true);
+                  });
+      
+                  shuffleTiles();
+
+                  draggableListItems = document.querySelectorAll('.draggable-list li');  // Refresh the node list
+                  addEventListeners(); // Re-add event listeners after shuffling
+              }
+              playAgainBtn.addEventListener('click', playAgain);
+      
+              addEventListeners();
+          });
+      </script>
+
+  </body>
+</html>
