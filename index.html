@@ -4,7 +4,7 @@
         <!-- Metadata -->
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Activity</title>
+        <title>Eco-Resilience Match-Up</title>
 
         <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -331,24 +331,27 @@
 
     </head>
     <body>
-        <h1> Energy Matching Game </h1>
-        <p>Drag the energy type over the matching energy feature</p>
+        <h1> Eco-Resilience Match-Up</h1>
+        <p>Welcome to the game Eco-Resilience Match-Up! In this challenge, you'll pair natural hazards—like flooding or wildfires—with eco-friendly solutions designed to defend against them. Get ready to test your knowledge and discover how sustainable features can protect our environment!</p>
+        <h3>Drag the eco-friendly solution on the LEFT over the hazard it's most likely to defend against on the RIGHT</h3>
 
         <main class="container">
             <div>
                 <ul class="draggable-list">
-                    <li id="e1" draggable="true">Solar Energy</li>
-                    <li id="e2" draggable="true">Wind Energy</li>
-                    <li id="e3" draggable="true">Hydropower</li>
-                    <li id="e4" draggable="true">Geothermal</li>
+                    <li id="e1" draggable="true">Flooding</li>
+                    <li id="e2" draggable="true">Strong Winds</li>
+                    <li id="e3" draggable="true">Earthquake</li>
+                    <li id="e4" draggable="true">Fire</li>
+                    <li id="e5" draggable="true">Lightning</li>
                 </ul>
             </div>
             <div>
                 <ul class="draggable-list">
-                    <li id="f4" draggable="true">Steam Power Plant</li>
-                    <li id="f1" draggable="true">Solar Panel</li>
-                    <li id="f2" draggable="true">Wind Turbine</li>
-                    <li id="f3" draggable="true">Dam</li>
+                    <li id="f4" draggable="true">Fire-Resistant Building Materials</li>
+                    <li id="f1" draggable="true">Sandbags</li>
+                    <li id="f2" draggable="true">Strong Roofs</li>
+                    <li id="f3" draggable="true">Shock-Absorbing Foundation</li>
+                    <li id="f5" draggable="true">Lightning Rod</li>
                 </ul>
             </div>
         </main>
@@ -358,25 +361,29 @@
             <h3>You matched all the tiles correctly!</h3>
             <table>
                 <tr>
-                    <th>Energy Type</th>
-                    <th>Energy Feature</th>
+                    <th>Eco-Solution</th>
+                    <th>Hazard Type</th>
                 </tr>
                 <tr>
-                    <td>Wind Energy</td>
-                    <td>Wind Turbine</td>
+                    <td>Flooding</td>
+                    <td>Sandbags</td>
                 </tr>
                 <tr>
-                    <td>Hydropower</td>
-                    <td>Dam</td>
+                    <td>Strong Winds</td>
+                    <td>Strong Roofs</td>
                 </tr>
                 <tr>
-                    <td>Solar Energy</td>
-                    <td>Solar Panel</td>
+                    <td>Earthquake</td>
+                    <td>Shock absorbing Foundation</td>
                 </tr>
                 <tr>
-                    <td>Geothermal</td>
-                    <td>Steam Power Plant</td>
+                    <td>Fire</td>
+                    <td>Fire Resistant Building Materials</td>
                 </tr>
+                <tr>
+                  <td>Lightning</td>
+                  <td>Lightning Rod</td>
+              </tr>
             </table>
 
             <button id="playAgainBtn">Play Again</button>
@@ -416,29 +423,30 @@
                       document.getElementById(selectedId).setAttribute('draggable', false);
                       document.getElementById(dropTargetId).setAttribute('draggable', false);
                       matchingCounter++;
-                      if (matchingCounter === 4) {
+                      if (matchingCounter === 5) {
                           setTimeout(() => endMessage.style.display = 'block', 500);
                       }
                   } else {
                       let hint = getHint(selectedId, dropTargetId);
                       hintMessage.innerText = `Incorrect match. ${hint}`;
                       hintMessage.style.display = 'block';
-                      setTimeout(() => hintMessage.style.display = 'none', 3000);
+                      setTimeout(() => hintMessage.style.display = 'none', 8000);
                   }
                   this.classList.remove('over');
               }
       
               function checkForMatch(selected, dropTarget) {
-                  const pairs = { 'e1': 'f1', 'e2': 'f2', 'e3': 'f3', 'e4': 'f4' };
+                  const pairs = { 'e1': 'f1', 'e2': 'f2', 'e3': 'f3', 'e4': 'f4', 'e5':'f5' };
                   return pairs[selected] === dropTarget;
               }
       
               function getHint(selected, dropTarget) {
                   const hints = {
-                      'e1': 'Solar Energy powers Solar Panels.',
-                      'e2': 'Wind Energy powers Wind Turbines.',
-                      'e3': 'Hydropower uses Dams.',
-                      'e4': 'Geothermal energy is used in Steam Power Plants.'
+                      'e1': 'Sandbags are great at absorbing water!',
+                      'e2': 'Tornado winds are strong enough to blow the roof off a house!',
+                      'e3': 'Buildings need to be built strong enough to withstand earthquakes!',
+                      'e4': 'Some buildings can withstand fire because of the kind of materials they are build with.',
+                      'e5': 'Buildings need something to absorb lightning strikes'
                   };
                   return hints[selected] || 'Try matching related energy types and features.';
               }
