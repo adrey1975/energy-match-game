@@ -205,26 +205,25 @@
     </head>
     <body>
         <h1> Eco-Resilience Match-Up</h1>
-        <p>Welcome to the game Eco-Resilience Match-Up! In this challenge, you'll pair natural hazards—like flooding or wildfires—with eco-friendly solutions designed to defend against them. Get ready to test your knowledge and discover how sustainable features can protect our environment!</p>
         <h3>Drag and Drop to match the eco-friendly solution on the LEFT with the hazard it will defend against on the RIGHT</h3>
-
+        <canvas id="confettiCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none;"></canvas>
         <main class="container">
             <div>
                 <ul class="draggable-list">
-                    <li id="e1" draggable="true">Flooding</li>
-                    <li id="e2" draggable="true">Strong Winds</li>
-                    <li id="e3" draggable="true">Earthquake</li>
-                    <li id="e4" draggable="true">Fire</li>
-                    <li id="e5" draggable="true">Lightning</li>
+                    <li id="e1" draggable="true">Fire-Resistant Building Materials</li>
+                    <li id="e2" draggable="true">Sandbags</li>
+                    <li id="e3" draggable="true">Strong Roofs</li>
+                    <li id="e4" draggable="true">Shock-Absorbing Foundation</li>
+                    <li id="e5" draggable="true">Lightning Rod</li>
                 </ul>
             </div>
             <div>
                 <ul class="draggable-list">
-                    <li id="f4" draggable="true">Fire-Resistant Building Materials</li>
-                    <li id="f1" draggable="true">Sandbags</li>
-                    <li id="f2" draggable="true">Strong Roofs</li>
-                    <li id="f3" draggable="true">Shock-Absorbing Foundation</li>
-                    <li id="f5" draggable="true">Lightning Rod</li>
+                    <li id="f4" draggable="true">Earthquake</li>
+                    <li id="f1" draggable="true">Fire</li>
+                    <li id="f2" draggable="true">Flooding</li>
+                    <li id="f3" draggable="true">Strong Winds</li>
+                    <li id="f5" draggable="true">Lightning</li>
                 </ul>
             </div>
         </main>
@@ -297,7 +296,8 @@
                       document.getElementById(dropTargetId).setAttribute('draggable', false);
                       matchingCounter++;
                       if (matchingCounter === 5) {
-                          setTimeout(() => endMessage.style.display = 'block', 500);
+                        triggerConfetti(); // Trigger confetti when all tiles are matched
+                        setTimeout(() => endMessage.style.display = 'block', 500);
                       }
                   } else {
                       let hint = getHint(selectedId, dropTargetId);
@@ -323,14 +323,53 @@
                   };
                   return hints[selected] || 'Try matching related energy types and features.';
               }
-      
-              function shuffleTiles() {
-                  const lists = document.querySelectorAll('.draggable-list');
-                  lists.forEach(list => {
-                      let items = Array.from(list.children);
-                      for (let i = items.length - 1; i > 0; i--) {
-                          const j = Math.floor(Math.random() * (i + 1));
-                          [items[i], items[j]] = [items[j], items[i]];
+
+              // Set up the confetti canvas
+                const confettiCanvas = document.getElementById('confettiCanvas');
+                confettiCanvas.width = window.innerWidth;
+                confettiCanvas.height = window.innerHeight;
+                const ctx = confettiCanvas.getContext('2d');
+                let confettiParticles = [];
+
+                function triggerConfetti() {
+                // Resize the canvas (useful if the window size changed)
+                confettiCanvas.width = window.innerWidth;
+                confettiCanvas.height = window.innerHeight;
+                // Create 300 confetti particles with random properties
+                for (let i = 0; i < 300; i++) {
+                    confettiParticles.push({
+                    x: Math.random() * confettiCanvas.width,
+                    y: Math.random() * confettiCanvas.height,
+                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+                    size: Math.random() * 5 + 2,
+                    speed: Math.random() * 3 + 1,
+                    });
+                }
+                drawConfetti();
+                }
+
+                function drawConfetti() {
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                confettiParticles.forEach((particle, i) => {
+                    ctx.fillStyle = particle.color;
+                    ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
+                    particle.y += particle.speed;
+                    // Remove particles that fall below the canvas
+                    if (particle.y > confettiCanvas.height) confettiParticles.splice(i, 1);
+                });
+                if (confettiParticles.length > 0) {
+                    requestAnimationFrame(drawConfetti);
+                }
+                }
+
+      // Shuffle the tiles with every playthrough
+            function shuffleTiles() {
+                const lists = document.querySelectorAll('.draggable-list');
+                lists.forEach(list => {
+                    let items = Array.from(list.children);
+                    for (let i = items.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [items[i], items[j]] = [items[j], items[i]];
                       }
                       list.innerHTML = '';
                       items.forEach(item => list.appendChild(item));
