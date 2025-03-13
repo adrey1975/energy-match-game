@@ -276,7 +276,9 @@
           document.addEventListener('DOMContentLoaded', () => {
               const endMessage = document.getElementById('endMessage');
               const hintMessage = document.getElementById('hintMessage');
-              const playAgainBtn = document.getElementById('playAgainBtn'); 
+              const playAgainBtn = document.getElementById('playAgainBtn');
+              const correctSound = new Audio('correct.mp3');
+                const swapSound = new Audio('swap.mp3'); 
       
               function addEventListeners() {
                   const draggableListItems = document.querySelectorAll('.draggable-list li');
@@ -296,14 +298,17 @@
               
               function dragDrop() {
                   dropTargetId = this.id;
+                  swapSound.play(); // Play sound when tiles are swapped
                   if (checkForMatch(selectedId, dropTargetId)) {
                       document.getElementById(selectedId).style.backgroundColor = 'green';
                       document.getElementById(dropTargetId).style.backgroundColor = 'green';
                       document.getElementById(selectedId).setAttribute('draggable', false);
                       document.getElementById(dropTargetId).setAttribute('draggable', false);
                       matchingCounter++;
+
                       if (matchingCounter === 5) {
                         triggerConfetti(); // Trigger confetti when all tiles are matched
+                        correctSound.play(); // Play sound when all tiles are matched
                         setTimeout(() => endMessage.style.display = 'block', 500);
                       }
                   } else {
