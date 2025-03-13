@@ -77,6 +77,7 @@
                 max-width: 768px;
                 margin: auto;
                 padding: 20px;
+                border-radius: .4em;
 
             }
 
@@ -111,7 +112,7 @@
                 background-color: white;
             }
 
-            .block-container.correct {
+            .container.correct {
                 background: linear-gradient(207deg, rgba(204,238,242,1) 0%, rgba(134,213,224,1) 40%, rgba(162,169,242,1) 100%);
             }
 
@@ -216,6 +217,7 @@
                 color: red;
                 margin-top: 20px;
                 font-weight: bold;
+                font-size: larger;
             } 
 
         </style>
@@ -223,7 +225,7 @@
 
     <body>
         <h1> Eco-Resilience Match-Up</h1>
-        <h3>Drag and Drop to match the eco-friendly solution on the LEFT with the natrual hazard it will defend against on the RIGHT</h3>
+        <h3>Drag and Drop to match the eco-friendly solution on the LEFT with the natural hazard it will defend against on the RIGHT</h3>
         <canvas id="confettiCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none;"></canvas>
         <main class="container">
             <div class="block-container">
@@ -287,6 +289,7 @@
           let matchingCounter = 0;
       
           document.addEventListener('DOMContentLoaded', () => {
+            const blockContainer = document.querySelector('.container');
               const endMessage = document.getElementById('endMessage');
               const hintMessage = document.getElementById('hintMessage');
               const playAgainBtn = document.getElementById('playAgainBtn');
@@ -323,12 +326,13 @@
                         triggerConfetti(); // Trigger confetti when all tiles are matched
                         correctSound.play(); // Play sound when all tiles are matched
                         setTimeout(() => endMessage.style.display = 'block', 500);
+                        blockContainer.classList.add('correct');
                       }
                   } else {
                       let hint = getHint(selectedId, dropTargetId);
                       hintMessage.innerText = `Incorrect match. ${hint}`;
                       hintMessage.style.display = 'block';
-                      setTimeout(() => hintMessage.style.display = 'none', 8000);
+                      setTimeout(() => hintMessage.style.display = 'none', 4000);
                   }
                   this.classList.remove('over');
               }
@@ -385,7 +389,7 @@
                 if (confettiParticles.length > 0) {
                     requestAnimationFrame(drawConfetti);
                 }
-                }
+            }
 
       // Shuffle the tiles with every playthrough
             function shuffleTiles() {
@@ -404,6 +408,7 @@
               function playAgain() {
                   document.getElementById('endMessage').style.display = 'none';
                   matchingCounter = 0;
+                  blockContainer.classList.remove('correct');
       
                   const allItems = document.querySelectorAll('.draggable-list li');
                   allItems.forEach(item => {
