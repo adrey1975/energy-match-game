@@ -325,6 +325,55 @@
                       item.addEventListener('drop', dragDrop);
                   });
               }
+
+              // Global array to store connections
+                let connections = [];
+
+                // Function to draw a bubbly line between two points
+                function drawBubblyLine(ctx, x1, y1, x2, y2) {
+                const numBubbles = 15;
+                for (let i = 0; i <= numBubbles; i++) {
+                    let t = i / numBubbles;
+                    let x = x1 + (x2 - x1) * t;
+                    let y = y1 + (y2 - y1) * t;
+                    // Optional jitter for a bubbly effect:
+                    let jitterX = (Math.random() - 0.5) * 4;
+                    let jitterY = (Math.random() - 0.5) * 4;
+                    ctx.beginPath();
+                    ctx.arc(x + jitterX, y + jitterY, 5, 0, 2 * Math.PI);
+                    ctx.fillStyle = 'black';
+                    ctx.fill();
+                }
+            }
+
+                // Function to redraw all connections on the line canvas
+                function drawConnections() {
+                const lineCanvas = document.getElementById('lineCanvas');
+                const ctx = lineCanvas.getContext('2d');
+                // Update canvas dimensions (covers scrolling/resizing)
+                lineCanvas.width = window.innerWidth;
+                lineCanvas.height = window.innerHeight;
+                ctx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
+                // Draw each saved connection
+                connections.forEach(conn => {
+                    const elem1 = document.getElementById(conn.source);
+                    const elem2 = document.getElementById(conn.target);
+                    if (elem1 && elem2) {
+                    const rect1 = elem1.getBoundingClientRect();
+                    const rect2 = elem2.getBoundingClientRect();
+                    // Get center points of the tiles
+                    const x1 = rect1.left + rect1.width / 2;
+                    const y1 = rect1.top + rect1.height / 2;
+                    const x2 = rect2.left + rect2.width / 2;
+                    const y2 = rect2.top + rect2.height / 2;
+                    drawBubblyLine(ctx, x1, y1, x2, y2);
+                    }
+                });
+                }
+
+                // Update lines on scroll and window resize
+                window.addEventListener('scroll', drawConnections);
+                window.addEventListener('resize', drawConnections);
       
               function dragStart() { selectedId = this.id; }
               function dragEnter() { this.classList.add('over'); }
@@ -346,6 +395,9 @@
                       document.getElementById(dropTargetId).setAttribute('draggable', false);
                       matchingCounter++;
 
+                    // Add connection for this correct match and redraw lines
+                    connections.push({source: selectedId, target: dropTargetId});
+                    drawConnections();
 
                       if (matchingCounter === 5) {
                         triggerConfetti(); // Trigger confetti when all tiles are matched
@@ -416,7 +468,7 @@
                 }
             }
 
-      // Shuffle the tiles with every playthrough
+            // Shuffle the tiles with every playthrough
             function shuffleTiles() {
                 const lists = document.querySelectorAll('.draggable-list');
                 lists.forEach(list => {
@@ -443,9 +495,12 @@
                   });
       
                   shuffleTiles();
-
                   draggableListItems = document.querySelectorAll('.draggable-list li');  // Refresh the node list
                   addEventListeners(); // Re-add event listeners after shuffling
+
+                  // Clear all connection lines
+                  connections = [];
+                  drawConnections();
               }
               playAgainBtn.addEventListener('click', playAgain);
       
