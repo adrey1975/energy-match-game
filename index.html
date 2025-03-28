@@ -313,9 +313,24 @@
               const correctSound = new Audio('correct.mp3');
               const swapSound = new Audio('swap.mp3'); 
 
-
+            // Helper function to compute the intersection point on the tile edge
+            function getEdgePoint(rect, cx, cy, tx, ty) {
+                const dx = tx - cx;
+                const dy = ty - cy;
+                const hx = rect.width / 2;
+                const hy = rect.height / 2;
+                let t = Infinity;
+                if (dx !== 0) {
+                    t = Math.min(t, hx / Math.abs(dx));
+                }
+                if (dy !== 0) {
+                    t = Math.min(t, hy / Math.abs(dy));
+                }
+                if (t === Infinity) t = 0;
+                return { x: cx + dx * t, y: cy + dy * t };
+            }
       
-              function addEventListeners() {
+            function addEventListeners() {
                   const draggableListItems = document.querySelectorAll('.draggable-list li');
                   draggableListItems.forEach(item => {
                       item.addEventListener('dragstart', dragStart);
@@ -331,21 +346,25 @@
 
                 // Function to draw a bubbly line between two points
                 function drawBubblyLine(ctx, x1, y1, x2, y2) {
-                const numBubbles = 15;
-                for (let i = 0; i <= numBubbles; i++) {
-                    let t = i / numBubbles;
-                    let x = x1 + (x2 - x1) * t;
-                    let y = y1 + (y2 - y1) * t;
-                    // Optional jitter for a bubbly effect:
-                    let jitterX = (Math.random() - 0.5) * 4;
-                    let jitterY = (Math.random() - 0.5) * 4;
+                    ctx.save();  // Create a gradient that includes the root teal color for a dynamic effect.
+                    const grad = ctx.createLinearGradient(x1, y1, x2, y2);
+                    const computedStyle = getComputedStyle(document.documentElement);
+                    const teal = computedStyle.getPropertyValue('--teal').trim();
+                    grad.addColorStop(0, teal);  // Use root teal as the start color
+                    grad.addColorStop(1, 'rgba(134,213,224,1)'); // End color remains the same
+                    
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = 4;
+                    ctx.lineCap = 'round';
+                    // Add a drop shadow to help the line pop out.
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+                    ctx.shadowBlur = 8;
                     ctx.beginPath();
-                    ctx.arc(x + jitterX, y + jitterY, 5, 0, 2 * Math.PI);
-                    ctx.fillStyle = 'black';
-                    ctx.fill();
+                    ctx.moveTo(x1, y1);
+                    ctx.lineTo(x2, y2);
+                    ctx.stroke();
+                    ctx.restore();
                 }
-            }
-
                 // Function to redraw all connections on the line canvas
                 function drawConnections() {
                 const lineCanvas = document.getElementById('lineCanvas');
@@ -362,25 +381,29 @@
                     const rect1 = elem1.getBoundingClientRect();
                     const rect2 = elem2.getBoundingClientRect();
                     // Get center points of the tiles
-                    const x1 = rect1.left + rect1.width / 2;
-                    const y1 = rect1.top + rect1.height / 2;
-                    const x2 = rect2.left + rect2.width / 2;
-                    const y2 = rect2.top + rect2.height / 2;
-                    drawBubblyLine(ctx, x1, y1, x2, y2);
+                    const sourceCenterX = rect1.left + rect1.width / 2;
+                    const sourceCenterY = rect1.top + rect1.height / 2;
+                    const targetCenterX = rect2.left + rect2.width / 2;
+                    const targetCenterY = rect2.top + rect2.height / 2;
+                    
+                    const sourceEdge = getEdgePoint(rect1, sourceCenterX, sourceCenterY, targetCenterX, targetCenterY);
+                    const targetEdge = getEdgePoint(rect2, targetCenterX, targetCenterY, sourceCenterX, sourceCenterY);
+                    drawBubblyLine(ctx, sourceEdge.x, sourceEdge.y, targetEdge.x, targetEdge.y);
                     }
                 });
-                }
+            }
 
-                // Update lines on scroll and window resize
-                window.addEventListener('scroll', drawConnections);
-                window.addEventListener('resize', drawConnections);
+            // Update lines on scroll and window resize
+            window.addEventListener('scroll', drawConnections);
+            window.addEventListener('resize', drawConnections);
       
-              function dragStart() { selectedId = this.id; }
-              function dragEnter() { this.classList.add('over'); }
-              function dragLeave() { this.classList.remove('over'); }
-              function dragOver(ev) { ev.preventDefault(); }
-              
-              function dragDrop() {
+            function dragStart() { selectedId = this.id; }
+            function dragEnter() { this.classList.add('over'); }
+            function dragLeave() { this.classList.remove('over'); }
+            function dragOver(ev) { ev.preventDefault(); }
+
+            // Function to handle the drop event and check for matches
+            function dragDrop() {
                   dropTargetId = this.id;
                   swapSound.play(); // Play sound when tiles are swapped
                   if (checkForMatch(selectedId, dropTargetId)) {
@@ -510,3 +533,4 @@
 
   </body>
 </html>
+<!-- End of HTML document -->
