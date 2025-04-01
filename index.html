@@ -1,536 +1,567 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Metadata -->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Eco-Resilience Match-Up</title>
+  <head>
+    <!-- Metadata -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eco-Resilience Match-Up</title>
 
-        <!-- Google Fonts -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,600;1,400;1,600&display=swap"
+      rel="stylesheet"
+    />
 
-        <!-- CSS -->
-        <style>
-            :root {
-              --blue: rgb(92, 113, 242);
-              --blue-dark: rgb(51, 56, 118);
-              --blue-light: rgb(162, 169, 242);
-              --gray: rgb(197, 197, 197);
-              --gray-dark: rgb(124, 124, 124);
-              --gray-light: rgb(237, 237, 237);
-              --off-black: rgb(36, 36, 36);
-              --off-white: rgb(250, 250, 250);
-              --teal: rgb(134, 213, 224);
-              --teal-dark: rgb(100, 160, 168);
-              --teal-light: rgb(204, 238, 242);
-            }
+    <!-- CSS -->
+    <style>
+      :root {
+        --blue: rgb(92, 113, 242);
+        --blue-dark: rgb(51, 56, 118);
+        --blue-light: rgb(162, 169, 242);
+        --gray: rgb(197, 197, 197);
+        --gray-dark: rgb(124, 124, 124);
+        --gray-light: rgb(237, 237, 237);
+        --off-black: rgb(36, 36, 36);
+        --off-white: rgb(250, 250, 250);
+        --teal: rgb(134, 213, 224);
+        --teal-dark: rgb(100, 160, 168);
+        --teal-light: rgb(204, 238, 242);
+      }
 
-            body {
-              background-color: var(--off-white);
-              font-family: "Poppins", sans-serif;
-            }
+      body {
+        background-color: var(--off-white);
+        font-family: "Poppins", sans-serif;
+      }
 
+      .button-blue {
+        --button-color: white;
+        --button-background-color: var(--blue);
+        --button-border-color: var(--blue-dark);
+        --button-hover-background-color: var(--blue-dark);
+      }
 
-            .button-blue {
-              --button-color: white;
-              --button-background-color: var(--blue);
-              --button-border-color: var(--blue-dark);
-              --button-hover-background-color: var(--blue-dark);
-            }
+      .button-dark {
+        --button-color: white;
+        --button-background-color: var(--off-black);
+        --button-border-color: black;
+        --button-hover-background-color: black;
+      }
 
-            .button-dark {
-              --button-color: white;
-              --button-background-color: var(--off-black);
-              --button-border-color: black;
-              --button-hover-background-color: black;
-            }
+      .button-light {
+        --button-color: black;
+        --button-background-color: var(--gray-light);
+        --button-border-color: var(--gray-dark);
+        --button-hover-background-color: var(--gray);
+      }
 
-            .button-light {
-              --button-color: black;
-              --button-background-color: var(--gray-light);
-              --button-border-color: var(--gray-dark);
-              --button-hover-background-color: var(--gray);
-            }
+      .button-teal {
+        --button-color: black;
+        --button-background-color: var(--teal);
+        --button-border-color: var(--teal-dark);
+        --button-hover-background-color: var(--teal-dark);
+      }
 
-            .button-teal {
-              --button-color: black;
-              --button-background-color: var(--teal);
-              --button-border-color: var(--teal-dark);
-              --button-hover-background-color: var(--teal-dark);
-            }
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-weight: 600;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+        color: var(--off-black);
+      }
 
-            h1, h2, h3, h4, h5, h6 {
-              font-weight: 600;
-              line-height: 1.2;
-              margin-bottom: .5rem;
-              margin-top: 0;
-              color: var(--off-black);
-            }
+      /* Adrian's CSS */
+      .container {
+        max-width: 768px;
+        margin: auto;
+        padding: 20px;
+        border-radius: 0.4em;
+      }
 
+      h1 {
+        margin-top: 10px;
+      }
 
+      h1,
+      h3,
+      p {
+        text-align: center;
+        color: var(--off-black);
+      }
 
+      p {
+        margin-bottom: 20px;
+      }
 
-            /* Adrian's CSS */
-            .container {
-                max-width: 768px;
-                margin: auto;
-                padding: 20px;
-                border-radius: .4em;
+      h3 {
+        margin-top: 10px;
+      }
 
-            }
+      main {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
 
-            h1 {
-                margin-top: 10px;
-            }
+      .bigContainer {
+        max-width: 768px;
+        margin: 0 auto;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        padding: 30px;
+        border: 0.2em solid var(--gray-light);
+        border-radius: 0.4em;
+        background-color: white;
+      }
 
-            h1, h3, p {
-                text-align: center;
-                color: var(--off-black);
-                
-            }
+      .block-container {
+        margin: 10px;
+        padding: 10px;
+        border: 0.2em solid var(--gray-light);
+        border-radius: 0.4em;
+        background-color: white;
+      }
 
-            p {
-                margin-bottom: 20px;
-            }
+      .container.correct {
+        background: linear-gradient(
+          207deg,
+          rgba(204, 238, 242, 1) 0%,
+          rgba(134, 213, 224, 1) 40%,
+          rgba(162, 169, 242, 1) 100%
+        );
+      }
 
-            h3 {
-                margin-top: 10px;
-            }
+      .draggable-list {
+        --block-container-border-color: var(--off-black);
+        background-color: white;
+        border-radius: 0.4em;
+        padding: 1em 1em 0em 1em;
+        margin: 0.2em 0;
+        width: auto;
+        margin-bottom: 30px;
+      }
 
-            main {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-            }
+      li {
+        list-style: none;
+        padding: 10px;
+        margin: 10px;
+        background-color: var(--off-white);
+        color: var(--off-black);
+        cursor: grab;
+        border-radius: 0.4em;
+        border: 0.2em solid var(--gray-light);
+        text-align: center;
+      }
 
-            .bigContainer {
-                max-width: 768px;
-                margin: 0 auto;
-                margin-top: 100px;
-                margin-bottom: 100px;
-                padding: 30px;
-                border: .2em solid var(--gray-light);
-                border-radius: .4em;
-                background-color: white;
-            }
+      li:hover {
+        border: 1px solid var(--gray-light) !important;
+        cursor: grabbing !important;
+        transition: background-color 0.3s ease-in-out,
+          color 0.3s ease-in-out, border 0.3s ease-in-out,
+          cursor 0.3s ease-in-out, transform 0.3s ease-in-out;
+        transform: scale(1.05);
+      }
 
-            .block-container {
-                margin: 10px;
-                padding: 10px;
-                border: .2em solid var(--gray-light);
-                border-radius: .4em;
-                background-color: white;
-            }
+      .over {
+        background-color: var(--gray-light) !important;
+        color: var(--off-black) !important;
+        border: 1px solid var(--gray-light) !important;
+      }
 
-            .container.correct {
-                background: linear-gradient(207deg, rgba(204,238,242,1) 0%, rgba(134,213,224,1) 40%, rgba(162,169,242,1) 100%);
-            }
+      #endMessage table,
+      #endMessage th,
+      #endMessage td {
+        text-align: center;
+      }
 
-            .draggable-list {
-                --block-container-border-color: var(--off-black);
-                background-color: white;  
-                border-radius: .4em;
-                padding: 5px;
-                margin: .2em 0em;
-                padding: 1em 1em 0em 1em;
-                width: auto;
-                margin-bottom: 30px;
-            }
+      table {
+        max-width: 640px;
+        margin: auto;
+        margin-bottom: 20px;
+      }
 
+      th,
+      td {
+        padding: 10px 10px;
+      }
 
-            li {
-                list-style: none;
-                padding: 10px;
-                margin: 10px;
-                background-color: var(--off-white);
-                color: var(--off-black);
-                cursor: grab;
-                border-radius: .4em;
-                border: .2em solid var(--gray-light); /* border color */
-                text-align: center;
-            }
+      td {
+        border: 1px solid var(--gray-light);
+        border-radius: 0.4em;
+      }
 
-            li:hover {
-                border: 1px solid var(--gray-light) !important;
-                cursor: grabbing !important;
-                transition: background-color 0.3s ease-in-out;
-                transition: color 0.3s ease-in-out;
-                transition: border 0.3s ease-in-out;
-                transition: cursor 0.3s ease-in-out;
-                transition: transform 0.3s ease-in-out;
-                transform: scale(1.05);
-            }
+      tr:nth-child(even) {
+        background-color: rgb(197, 197, 197);
+      }
 
+      .playAgain {
+        --reset-border-color: var(--blue);
+        height: 3em;
+        border-radius: 1.5em;
+        font-family: inherit;
+        border: none;
+        background-color: var(--blue);
+        color: white;
+        padding: 0em 3em;
+        transition: background-color 0.15s ease-in-out, border 0.15s ease-in-out;
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+        cursor: pointer;
+      }
 
-            .over {
-                background-color: var(--gray-light) !important;
-                color:  var(--off-black)!important;
-                border: 1px solid var(--gray-light) !important;
-            }
+      .playAgain:hover {
+        border: 0.2em solid var(--reset-border-color) !important;
+      }
 
-            #endMessage table,
-            #endMessage th,
-            #endMessage td {
-                text-align: center;
-            }
+      .playAgain:active {
+        --reset-border-color: var(--blue-dark);
+        background-color: var(--blue-dark);
+      }
 
-            table {
-                max-width: 640px;
-                margin: auto;
-                margin-bottom: 20px;
-            }
+      /* End Message styled as a fixed overlay to avoid layout shifts */
+      #endMessage {
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
 
-            th, td{
-                padding: 10px 10px;
-            }
+      #hintMessage {
+        text-align: center;
+        color: red;
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: larger;
+      }
+    </style>
+  </head>
 
-            td {
-                border: em solid var(--gray-light);
-                border-radius: .4em;
-            }
-
-            tr:nth-child(even) {
-                background-color: rgb(197, 197, 197);
-            }
-
-            .playAgain {
-                --reset-border-color: var(--blue);
-                height: 3em;
-                border-radius: 1.5em;
-                font-family: inherit;
-                border: none;
-                background-color: var(--blue);
-                color: white;
-                padding: 0em 3em;
-                transition: background-color .15s ease-in-out, border .15s ease-in-out;
-                display: block;
-                margin: auto;
-                margin-top: 20px;
-                cursor: pointer;
-            }
-
-            .playAgain:hover {
-                border: .2em solid var(--reset-border-color) !important;
-            }
-
-            .playAgain:active {
-                --reset-border-color: var(--blue-dark);
-                background-color: var(--blue-dark);
-            }
-
-            #endMessage {
-                display: none;
-            }
-
-            #hintMessage {
-                text-align: center;
-                color: red;
-                margin-top: 20px;
-                font-weight: bold;
-                font-size: larger;
-            } 
-
-        </style>
-    </head>
-
-    <body>
+  <body>
     <div class="bigContainer">
-        <h1> Eco-Resilience Match-Up</h1>
-        <h3>Drag and drop to match the eco-friendly solution on the LEFT with the natural hazard it will defend against on the RIGHT.</h3>
-        <canvas id="confettiCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none;"></canvas>
+      <h1>Eco-Resilience Match-Up</h1>
+      <h3>
+        Drag and drop to match the eco-friendly solution on the LEFT with the
+        natural hazard it will defend against on the RIGHT.
+      </h3>
+      <canvas
+        id="confettiCanvas"
+        style="position: fixed; top: 0; left: 0; pointer-events: none;"
+      ></canvas>
 
-        <!-- New canvas for drawing bubbly lines -->
-        <canvas id="lineCanvas" style="position: fixed; top: 0; left: 0; pointer-events: none;"></canvas>
+      <!-- Canvas for drawing connection lines -->
+      <canvas
+        id="lineCanvas"
+        style="position: fixed; top: 0; left: 0; pointer-events: none;"
+      ></canvas>
 
-        <main class="container">
-            <div class="block-container">
-                <h3>Eco-Solutions</h3>
-                <ul class="draggable-list">
-                    <li id="e1" draggable="true">Fire-Resistant Materials</li>
-                    <li id="e2" draggable="true">Sandbags</li>
-                    <li id="e3" draggable="true">Strong Roofs</li>
-                    <li id="e4" draggable="true">Shock-Absorbing Foundation</li>
-                    <li id="e5" draggable="true">Lightning Rod</li>
-                </ul>
-            </div>
-            <div class="block-container">
-                <h3>Hazard Types</h3>
-                <ul class="draggable-list">
-                    <li id="f4" draggable="true">Earthquake</li>
-                    <li id="f1" draggable="true">Fire</li>
-                    <li id="f2" draggable="true">Flooding</li>
-                    <li id="f3" draggable="true">Strong Winds</li>
-                    <li id="f5" draggable="true">Lightning</li>
-                </ul>
-            </div>
-        </main>
-        <div id="hintMessage" style="display: none;"></div>
-        <div id="endMessage">
-            <h3>Great job!</h3>
-            <h3>You matched all the tiles correctly!</h3>
-            <table>
-                <tr>
-                    <th>Eco-Solution</th>
-                    <th>Hazard Type</th>
-                </tr>
-                <tr>
-                    <td>Sandbags</td>
-                    <td>Flooding</td>
-                </tr>
-                <tr>
-                    <td>Strong Roofs</td>
-                    <td>Strong Winds</td>
-                </tr>
-                <tr>
-                    <td>Shock Absorbing Foundation</td>
-                    <td>Earthquake</td>
-                </tr>
-                <tr>
-                    <td>Fire Resistant Materials</td>
-                    <td>Fire</td>
-                </tr>
-                <tr>
-                  <td>Lightning Rod</td>
-                  <td>Lightning</td>
-              </tr>
-            </table>
-
-            <button class="playAgain" id="playAgainBtn">Play Again</button>
+      <main class="container">
+        <div class="block-container">
+          <h3>Eco-Solutions</h3>
+          <ul class="draggable-list">
+            <li id="e1" draggable="true">Fire-Resistant Materials</li>
+            <li id="e2" draggable="true">Sandbags</li>
+            <li id="e3" draggable="true">Strong Roofs</li>
+            <li id="e4" draggable="true">Shock-Absorbing Foundation</li>
+            <li id="e5" draggable="true">Lightning Rod</li>
+          </ul>
         </div>
+        <div class="block-container">
+          <h3>Hazard Types</h3>
+          <ul class="draggable-list">
+            <li id="f4" draggable="true">Earthquake</li>
+            <li id="f1" draggable="true">Fire</li>
+            <li id="f2" draggable="true">Flooding</li>
+            <li id="f3" draggable="true">Strong Winds</li>
+            <li id="f5" draggable="true">Lightning</li>
+          </ul>
+        </div>
+      </main>
+      <div id="hintMessage" style="display: none;"></div>
+      <div id="endMessage">
+        <h3>Great job!</h3>
+        <h3>You matched all the tiles correctly!</h3>
+        <table>
+          <tr>
+            <th>Eco-Solution</th>
+            <th>Hazard Type</th>
+          </tr>
+          <tr>
+            <td>Sandbags</td>
+            <td>Flooding</td>
+          </tr>
+          <tr>
+            <td>Strong Roofs</td>
+            <td>Strong Winds</td>
+          </tr>
+          <tr>
+            <td>Shock Absorbing Foundation</td>
+            <td>Earthquake</td>
+          </tr>
+          <tr>
+            <td>Fire Resistant Materials</td>
+            <td>Fire</td>
+          </tr>
+          <tr>
+            <td>Lightning Rod</td>
+            <td>Lightning</td>
+          </tr>
+        </table>
+
+        <button class="playAgain" id="playAgainBtn">Play Again</button>
+      </div>
     </div>
 
-        <script>
-          let selectedId;
-          let dropTargetId;
-          let matchingCounter = 0;
-      
-          document.addEventListener('DOMContentLoaded', () => {
-            const blockContainer = document.querySelector('.container');
-              const endMessage = document.getElementById('endMessage');
-              const hintMessage = document.getElementById('hintMessage');
-              const playAgainBtn = document.getElementById('playAgainBtn');
-              const correctSound = new Audio('correct.mp3');
-              const swapSound = new Audio('swap.mp3'); 
+    <script>
+      let selectedId;
+      let dropTargetId;
+      let matchingCounter = 0;
 
-            // Helper function to compute the intersection point on the tile edge
-            function getEdgePoint(rect, cx, cy, tx, ty) {
-                const dx = tx - cx;
-                const dy = ty - cy;
-                const hx = rect.width / 2;
-                const hy = rect.height / 2;
-                let t = Infinity;
-                if (dx !== 0) {
-                    t = Math.min(t, hx / Math.abs(dx));
-                }
-                if (dy !== 0) {
-                    t = Math.min(t, hy / Math.abs(dy));
-                }
-                if (t === Infinity) t = 0;
-                return { x: cx + dx * t, y: cy + dy * t };
-            }
-      
-            function addEventListeners() {
-                  const draggableListItems = document.querySelectorAll('.draggable-list li');
-                  draggableListItems.forEach(item => {
-                      item.addEventListener('dragstart', dragStart);
-                      item.addEventListener('dragenter', dragEnter);
-                      item.addEventListener('dragover', dragOver);
-                      item.addEventListener('dragleave', dragLeave);
-                      item.addEventListener('drop', dragDrop);
-                  });
-              }
+      document.addEventListener("DOMContentLoaded", () => {
+        const blockContainer = document.querySelector(".container");
+        const endMessage = document.getElementById("endMessage");
+        const hintMessage = document.getElementById("hintMessage");
+        const playAgainBtn = document.getElementById("playAgainBtn");
+        const correctSound = new Audio("correct.mp3");
+        const swapSound = new Audio("swap.mp3");
 
-              // Global array to store connections
-                let connections = [];
-
-                // Function to draw a bubbly line between two points
-                function drawBubblyLine(ctx, x1, y1, x2, y2) {
-                    ctx.save();  // Create a gradient that includes the root teal color for a dynamic effect.
-                    const grad = ctx.createLinearGradient(x1, y1, x2, y2);
-                    const computedStyle = getComputedStyle(document.documentElement);
-                    const teal = computedStyle.getPropertyValue('--teal').trim();
-                    grad.addColorStop(0, teal);  // Use root teal as the start color
-                    grad.addColorStop(1, 'rgba(134,213,224,1)'); // End color remains the same
-                    
-                    ctx.strokeStyle = grad;
-                    ctx.lineWidth = 4;
-                    ctx.lineCap = 'round';
-                    // Add a drop shadow to help the line pop out.
-                    ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
-                    ctx.shadowBlur = 8;
-                    ctx.beginPath();
-                    ctx.moveTo(x1, y1);
-                    ctx.lineTo(x2, y2);
-                    ctx.stroke();
-                    ctx.restore();
-                }
-                // Function to redraw all connections on the line canvas
-                function drawConnections() {
-                const lineCanvas = document.getElementById('lineCanvas');
-                const ctx = lineCanvas.getContext('2d');
-                // Update canvas dimensions (covers scrolling/resizing)
-                lineCanvas.width = window.innerWidth;
-                lineCanvas.height = window.innerHeight;
-                ctx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
-                // Draw each saved connection
-                connections.forEach(conn => {
-                    const elem1 = document.getElementById(conn.source);
-                    const elem2 = document.getElementById(conn.target);
-                    if (elem1 && elem2) {
-                    const rect1 = elem1.getBoundingClientRect();
-                    const rect2 = elem2.getBoundingClientRect();
-                    // Get center points of the tiles
-                    const sourceCenterX = rect1.left + rect1.width / 2;
-                    const sourceCenterY = rect1.top + rect1.height / 2;
-                    const targetCenterX = rect2.left + rect2.width / 2;
-                    const targetCenterY = rect2.top + rect2.height / 2;
-                    
-                    const sourceEdge = getEdgePoint(rect1, sourceCenterX, sourceCenterY, targetCenterX, targetCenterY);
-                    const targetEdge = getEdgePoint(rect2, targetCenterX, targetCenterY, sourceCenterX, sourceCenterY);
-                    drawBubblyLine(ctx, sourceEdge.x, sourceEdge.y, targetEdge.x, targetEdge.y);
-                    }
-                });
-            }
-
-            // Update lines on scroll and window resize
-            window.addEventListener('scroll', drawConnections);
-            window.addEventListener('resize', drawConnections);
-      
-            function dragStart() { selectedId = this.id; }
-            function dragEnter() { this.classList.add('over'); }
-            function dragLeave() { this.classList.remove('over'); }
-            function dragOver(ev) { ev.preventDefault(); }
-
-            // Function to handle the drop event and check for matches
-            function dragDrop() {
-                  dropTargetId = this.id;
-                  swapSound.play(); // Play sound when tiles are swapped
-                  if (checkForMatch(selectedId, dropTargetId)) {
-
-
-                    // Turn title color blue when correctly matched and tile text white
-                      document.getElementById(selectedId).style.backgroundColor = 'var(--blue)';
-                      document.getElementById(dropTargetId).style.backgroundColor = 'var(--blue)';
-                      document.getElementById(selectedId).style.color = 'white';
-                      document.getElementById(dropTargetId).style.color = 'white';
-                      document.getElementById(selectedId).setAttribute('draggable', false);
-                      document.getElementById(dropTargetId).setAttribute('draggable', false);
-                      matchingCounter++;
-
-                    // Add connection for this correct match and redraw lines
-                    connections.push({source: selectedId, target: dropTargetId});
-                    drawConnections();
-
-                      if (matchingCounter === 5) {
-                        triggerConfetti(); // Trigger confetti when all tiles are matched
-                        correctSound.play(); // Play sound when all tiles are matched
-                        setTimeout(() => endMessage.style.display = 'block', 500);
-                        blockContainer.classList.add('correct');
-                      }
-                  } else {
-                      let hint = getHint(selectedId, dropTargetId);
-                      hintMessage.innerText = `Incorrect match. ${hint}`;
-                      hintMessage.style.display = 'block';
-                      setTimeout(() => hintMessage.style.display = 'none', 4000);
-                  }
-                  this.classList.remove('over');
-              }
-      
-              function checkForMatch(selected, dropTarget) {
-                  const pairs = { 'e1': 'f1', 'e2': 'f2', 'e3': 'f3', 'e4': 'f4', 'e5':'f5' };
-                  return pairs[selected] === dropTarget;
-              }
-      
-              function getHint(selected, dropTarget) {
-                  const hints = {
-                      'e1': 'Sandbags are great at absorbing water!',
-                      'e2': 'Tornado winds are strong enough to blow the roof off a house!',
-                      'e3': 'Buildings need to be built strong enough to withstand earthquakes!',
-                      'e4': 'Some buildings can withstand fire because of the kind of materials they are build with.',
-                      'e5': 'Buildings need something to absorb lightning strikes'
-                  };
-                  return hints[selected] || 'Try matching related energy types and features.';
-              }
-
-              // Set up the confetti canvas
-                const confettiCanvas = document.getElementById('confettiCanvas');
-                confettiCanvas.width = window.innerWidth;
-                confettiCanvas.height = window.innerHeight;
-                const ctx = confettiCanvas.getContext('2d');
-                let confettiParticles = [];
-
-                function triggerConfetti() {
-                // Resize the canvas (useful if the window size changed)
-                confettiCanvas.width = window.innerWidth;
-                confettiCanvas.height = window.innerHeight;
-                // Create 300 confetti particles with random properties
-                for (let i = 0; i < 300; i++) {
-                    confettiParticles.push({
-                    x: Math.random() * confettiCanvas.width,
-                    y: Math.random() * confettiCanvas.height,
-                    color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                    size: Math.random() * 5 + 2,
-                    speed: Math.random() * 3 + 1,
-                    });
-                }
-                drawConfetti();
-                }
-
-                function drawConfetti() {
-                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-                confettiParticles.forEach((particle, i) => {
-                    ctx.fillStyle = particle.color;
-                    ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
-                    particle.y += particle.speed;
-                    // Remove particles that fall below the canvas
-                    if (particle.y > confettiCanvas.height) confettiParticles.splice(i, 1);
-                });
-                if (confettiParticles.length > 0) {
-                    requestAnimationFrame(drawConfetti);
-                }
-            }
-
-            // Shuffle the tiles with every playthrough
-            function shuffleTiles() {
-                const lists = document.querySelectorAll('.draggable-list');
-                lists.forEach(list => {
-                    let items = Array.from(list.children);
-                    for (let i = items.length - 1; i > 0; i--) {
-                        const j = Math.floor(Math.random() * (i + 1));
-                        [items[i], items[j]] = [items[j], items[i]];
-                      }
-                      list.innerHTML = '';
-                      items.forEach(item => list.appendChild(item));
-                  });
-              }
-      
-              function playAgain() {
-                  document.getElementById('endMessage').style.display = 'none';
-                  matchingCounter = 0;
-                  blockContainer.classList.remove('correct');
-      
-                  const allItems = document.querySelectorAll('.draggable-list li');
-                  allItems.forEach(item => {
-                      item.style.backgroundColor = 'white';
-                      item.style.color = 'var(--off-black)'
-                      item.setAttribute('draggable', true);
-                  });
-      
-                  shuffleTiles();
-                  draggableListItems = document.querySelectorAll('.draggable-list li');  // Refresh the node list
-                  addEventListeners(); // Re-add event listeners after shuffling
-
-                  // Clear all connection lines
-                  connections = [];
-                  drawConnections();
-              }
-              playAgainBtn.addEventListener('click', playAgain);
-      
-              addEventListeners();
+        function addEventListeners() {
+          const draggableListItems =
+            document.querySelectorAll(".draggable-list li");
+          draggableListItems.forEach((item) => {
+            item.addEventListener("dragstart", dragStart);
+            item.addEventListener("dragenter", dragEnter);
+            item.addEventListener("dragover", dragOver);
+            item.addEventListener("dragleave", dragLeave);
+            item.addEventListener("drop", dragDrop);
           });
-    </script>
+        }
 
+        // Global array to store connections
+        let connections = [];
+
+        // Function to draw a connection line using a gradient based on the teal colors.
+        function drawLine(ctx, x1, y1, x2, y2) {
+          ctx.save();
+          const grad = ctx.createLinearGradient(x1, y1, x2, y2);
+          // Use teal for both stops (you can adjust if needed)
+          grad.addColorStop(0, getComputedStyle(document.documentElement)
+            .getPropertyValue("--teal")
+            .trim());
+          grad.addColorStop(1, "rgba(134,213,224,1)");
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 4;
+          ctx.lineCap = "round";
+          ctx.shadowColor = "rgba(0, 0, 0, 0.3)";
+          ctx.shadowBlur = 8;
+          ctx.beginPath();
+          ctx.moveTo(x1, y1);
+          ctx.lineTo(x2, y2);
+          ctx.stroke();
+          ctx.restore();
+        }
+
+        // Function to redraw all connections on the line canvas.
+        // Lines are drawn so that they start just outside the right edge of left tiles
+        // and end just outside the left edge of right tiles.
+        function drawConnections() {
+          const lineCanvas = document.getElementById("lineCanvas");
+          const ctx = lineCanvas.getContext("2d");
+          lineCanvas.width = window.innerWidth;
+          lineCanvas.height = window.innerHeight;
+          ctx.clearRect(0, 0, lineCanvas.width, lineCanvas.height);
+
+          // Define an offset (in pixels) so the lines begin outside the tile borders.
+          const offset = 5;
+
+          connections.forEach((conn) => {
+            const elem1 = document.getElementById(conn.source);
+            const elem2 = document.getElementById(conn.target);
+            if (elem1 && elem2) {
+              const rect1 = elem1.getBoundingClientRect();
+              const rect2 = elem2.getBoundingClientRect();
+
+              let sourceX, sourceY, targetX, targetY;
+              if (conn.source.startsWith("e") && conn.target.startsWith("f")) {
+                // For the left tile, start just outside its right edge.
+                sourceX = rect1.left + rect1.width + offset;
+                sourceY = rect1.top + rect1.height / 2;
+                // For the right tile, end just outside its left edge.
+                targetX = rect2.left - offset;
+                targetY = rect2.top + rect2.height / 2;
+              } else {
+                // Fallback: use the center points.
+                sourceX = rect1.left + rect1.width / 2;
+                sourceY = rect1.top + rect1.height / 2;
+                targetX = rect2.left + rect2.width / 2;
+                targetY = rect2.top + rect2.height / 2;
+              }
+
+              drawLine(ctx, sourceX, sourceY, targetX, targetY);
+            }
+          });
+        }
+
+        // Update connections on scroll and window resize.
+        window.addEventListener("scroll", drawConnections);
+        window.addEventListener("resize", drawConnections);
+
+        function dragStart() {
+          selectedId = this.id;
+        }
+        function dragEnter() {
+          this.classList.add("over");
+        }
+        function dragLeave() {
+          this.classList.remove("over");
+        }
+        function dragOver(ev) {
+          ev.preventDefault();
+        }
+
+        // Function to handle the drop event and check for matches.
+        function dragDrop() {
+          dropTargetId = this.id;
+          swapSound.play();
+          if (checkForMatch(selectedId, dropTargetId)) {
+            // Update tile colors and disable dragging.
+            document.getElementById(selectedId).style.backgroundColor =
+              "var(--blue)";
+            document.getElementById(dropTargetId).style.backgroundColor =
+              "var(--blue)";
+            document.getElementById(selectedId).style.color = "white";
+            document.getElementById(dropTargetId).style.color = "white";
+            document.getElementById(selectedId).setAttribute("draggable", false);
+            document.getElementById(dropTargetId).setAttribute("draggable", false);
+            matchingCounter++;
+
+            // Add connection for this match and redraw lines.
+            connections.push({ source: selectedId, target: dropTargetId });
+            drawConnections();
+
+            if (matchingCounter === 5) {
+              triggerConfetti();
+              correctSound.play();
+              // Show the end message overlay without shifting layout.
+              endMessage.style.visibility = "visible";
+              endMessage.style.opacity = "1";
+              blockContainer.classList.add("correct");
+            }
+          } else {
+            let hint = getHint(selectedId, dropTargetId);
+            hintMessage.innerText = `Incorrect match. ${hint}`;
+            hintMessage.style.display = "block";
+            setTimeout(() => {
+              hintMessage.style.display = "none";
+            }, 4000);
+          }
+          this.classList.remove("over");
+        }
+
+        function checkForMatch(selected, dropTarget) {
+          const pairs = {
+            e1: "f1",
+            e2: "f2",
+            e3: "f3",
+            e4: "f4",
+            e5: "f5",
+          };
+          return pairs[selected] === dropTarget;
+        }
+
+        function getHint(selected, dropTarget) {
+          const hints = {
+            e1: "Sandbags are great at absorbing water!",
+            e2: "Tornado winds are strong enough to blow the roof off a house!",
+            e3: "Buildings need to be built strong enough to withstand earthquakes!",
+            e4: "Some buildings can withstand fire because of the kind of materials they are built with.",
+            e5: "Buildings need something to absorb lightning strikes",
+          };
+          return hints[selected] || "Try matching related energy types and features.";
+        }
+
+        // Set up the confetti canvas.
+        const confettiCanvas = document.getElementById("confettiCanvas");
+        confettiCanvas.width = window.innerWidth;
+        confettiCanvas.height = window.innerHeight;
+        const ctx = confettiCanvas.getContext("2d");
+        let confettiParticles = [];
+
+        function triggerConfetti() {
+          confettiCanvas.width = window.innerWidth;
+          confettiCanvas.height = window.innerHeight;
+          for (let i = 0; i < 300; i++) {
+            confettiParticles.push({
+              x: Math.random() * confettiCanvas.width,
+              y: Math.random() * confettiCanvas.height,
+              color: `hsl(${Math.random() * 360}, 100%, 50%)`,
+              size: Math.random() * 5 + 2,
+              speed: Math.random() * 3 + 1,
+            });
+          }
+          drawConfetti();
+        }
+
+        function drawConfetti() {
+          ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+          confettiParticles.forEach((particle, i) => {
+            ctx.fillStyle = particle.color;
+            ctx.fillRect(particle.x, particle.y, particle.size, particle.size);
+            particle.y += particle.speed;
+            if (particle.y > confettiCanvas.height)
+              confettiParticles.splice(i, 1);
+          });
+          if (confettiParticles.length > 0) {
+            requestAnimationFrame(drawConfetti);
+          }
+        }
+
+        // Shuffle the tiles with every playthrough.
+        function shuffleTiles() {
+          const lists = document.querySelectorAll(".draggable-list");
+          lists.forEach((list) => {
+            let items = Array.from(list.children);
+            for (let i = items.length - 1; i > 0; i--) {
+              const j = Math.floor(Math.random() * (i + 1));
+              [items[i], items[j]] = [items[j], items[i]];
+            }
+            list.innerHTML = "";
+            items.forEach((item) => list.appendChild(item));
+          });
+        }
+
+        function playAgain() {
+          // Hide the end message overlay.
+          endMessage.style.visibility = "hidden";
+          endMessage.style.opacity = "0";
+          matchingCounter = 0;
+          blockContainer.classList.remove("correct");
+
+          const allItems = document.querySelectorAll(".draggable-list li");
+          allItems.forEach((item) => {
+            item.style.backgroundColor = "white";
+            item.style.color = "var(--off-black)";
+            item.setAttribute("draggable", true);
+          });
+
+          shuffleTiles();
+          // Refresh event listeners after shuffling.
+          const draggableListItems =
+            document.querySelectorAll(".draggable-list li");
+          addEventListeners();
+
+          // Clear all connection lines.
+          connections = [];
+          drawConnections();
+        }
+        playAgainBtn.addEventListener("click", playAgain);
+
+        addEventListeners();
+      });
+    </script>
   </body>
 </html>
-<!-- End of HTML document -->
